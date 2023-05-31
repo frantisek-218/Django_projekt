@@ -9,6 +9,7 @@ class Vedouci(models.Model):
                                 error_messages={'blank': 'Příjmení trenéra musí být vyplněno'})
     narozeni = models.DateField(blank=True, null=True, verbose_name='Datum narození')
     biografie = models.TextField(blank=True, verbose_name='Životopis')
+    fotografie = models.ImageField(upload_to="./media", height_field=None, width_field=None, max_length=100,  blank = True,null=True)
 
     class Meta:
         ordering = ['prijmeni', 'jmeno']
@@ -45,6 +46,7 @@ class Klub(models.Model):
     #fotografie = models.ImageField(upload_to='kluby_fotky', verbose_name='Fotografie')
     trener = models.ManyToManyField(Vedouci)
     liga = models.ManyToManyField(Liga)
+    foto_klubu = models.ImageField(upload_to="./media", height_field=None, width_field=None, max_length=100,  blank = True,null=True)
     HODNOCENI = (
         (0, 'Liga Mistrů'),
         (1, 'Evropská Liga'),
