@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Seznam Trenéru
+{% endblock %}
+
+{% block content %}
+    <h2>Seznam Trenérů</h2>
+    <div class="row bg-dark p-3">
+    {% for vedouci in trener %}
+        <div class="col-lg-2 col-md-3">
+            <img src="{{ trener.fotografie.url }}"
+                 class="img-fluid rounded"
+                 alt="{{ trener.jmeno }} {{ trener.prijmeni }}">
+            <p><a href="{% url 'author_detail' author.id %}">{{ author.jmeno }} {{ author.prijmeni }}</a></p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

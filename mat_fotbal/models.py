@@ -46,7 +46,7 @@ class Klub(models.Model):
     #fotografie = models.ImageField(upload_to='kluby_fotky', verbose_name='Fotografie')
     trener = models.ManyToManyField(Vedouci)
     liga = models.ManyToManyField(Liga)
-    foto_klubu = models.ImageField(upload_to="./media", height_field=None, width_field=None, max_length=100,  blank = True,null=True)
+    foto_klubu = models.ImageField(upload_to="kluby", height_field=None, width_field=None, max_length=100,  blank = True,null=True)
     HODNOCENI = (
         (0, 'Liga Mistrů'),
         (1, 'Evropská Liga'),

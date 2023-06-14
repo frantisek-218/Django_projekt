@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8 mt-3 mb-3">
+            <h2 class="bg-info text-light text-center text-uppercase p-3">{{ nadpis }}</h2>
+            {% for klub in kluby %}
+            <div class="row mb-3">
+                <div class="col-lg-3">
+                    <p>{{ klub.foto_klubu.url }}</p>
+                    <img src="{{ klub.foto_klubu.url }}" alt="{{ klub.nazev }}" class="img-fluid">
+                </div>
+                <div class="col-lg-9">
+                    <p>{% for trener in klub.trener.all %}<span class="badge badge-light">{{ trener.jmeno }} {{ trener.prijmeni }}</span>{% endfor %}</p>
+                    <h3><a href="#">{{ klub.nazev }}</a></h3>
+                    <!--<p>{{ kniha.obsah|truncatewords:30 }}</p>-->
+                    <p class="alert alert-secondary">Založeno: {{ klub.nazev }}, {{ klub.zalozeni }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-4 bg-light mt-3 mb-3">
+            <h2 class="bg-secondary text-light text-center p-3">Přehled týmů</h2>
+            <ul class="list-group">
+            {% for klub in kluby %}
+                {% if klub.nazev == nadpis %}
+                <li class="list-group-item active">{{ klub.nazev }} <span class="badge badge-info"></span></li>
+                {% else %}
+                <li class="list-group-item"><a href="#">{{ klub.nazev }}</a> <span class="badge badge-info"></span></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
