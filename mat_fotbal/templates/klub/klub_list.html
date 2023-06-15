@@ -1,19 +1,37 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Seznam Trenéru
-{% endblock %}
-
 {% block content %}
-    <h2>Seznam Trenérů</h2>
-    <div class="row bg-dark p-3">
-    {% for vedouci in trener %}
-        <div class="col-lg-2 col-md-3">
-            <img src="{{ trener.fotografie.url }}"
-                 class="img-fluid rounded"
-                 alt="{{ trener.jmeno }} {{ trener.prijmeni }}">
-            <p><a href="{% url 'author_detail' author.id %}">{{ author.jmeno }} {{ author.prijmeni }}</a></p>
+    <div class="row">
+        <div class="col-lg-8 mt-3 mb-3">
+            {% for klub in kluby %}
+            <div class="row mb-3">
+                <div class="col-lg-3">
+                    <img src="{{ klub.foto_klubu.url }}" alt="{{ klub.nazev }}"  width="100px" height="100px">
+                </div>
+                <div class="col-lg-9">
+                    <p>
+                        {% for trener in klub.trener.all %}
+                            <span class="badge badge-dark">{{ trener.jmeno }} {{ trener.prijmeni }}</span>
+                        {% endfor %}
+                    </p>
+                    <h3><a class="text-dark"href="{% url 'klub_detail' pk=klub.id %}">{{ klub.nazev }}</a></h3>
+                    <p class="truncate-words">{{ klub.popis }}</p>
+                    <p class="alert alert-secondary bg-dark text-light">Založeno: {{ klub.zalozeni }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+        <div class="col-lg-4  mt-3 mb-3">
+            <h2 class="bg-dark text-light text-center p-3">Přehled týmů</h2>
+            <ul class="list-group">
+            {% for klub in kluby %}
+                {% if klub.nazev == nadpis %}
+                <li class="list-group-item active">{{ klub.nazev }} <span class="badge badge-info"></span></li>
+                {% else %}
+                <li class="list-group-item"><a href="{% url 'klub_detail' pk=klub.id %}" class="text-dark">{{ klub.nazev }}</a> <span class="badge"></span></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

@@ -23,4 +23,9 @@ class KlubDetailView(DetailView):
     model = Klub
     context_object_name = "klub"
     template_name = "klub/klub_detail.html"
-        
+
+    def get(self, request, *args, **kwargs):
+        klub = self.get_object()
+        print(klub)  # Výstup do konzole pro kontrolu
+        return super().get(request, *args, **kwargs)
+
